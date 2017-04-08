@@ -24,12 +24,10 @@ NDisplay::~NDisplay(void) {
 	// std::cout<<"Destructor called"<<std::endl;
 }
 void NDisplay::draw(Shape& shape) 
-{
+{	
 	for (int i=0; i < shape.getHeight(); i++)
-	{
 		for (int j=0; j < shape.getWidth(); j++)
-			print(shape.getshape()[i*(j+1)], shape.getPosX() + i, shape.getPosY() + j);
-	}
+			print(shape.getshape()[i * shape.getWidth() + j], shape.getPosX() + j, shape.getPosY() + i);
 }
 
 void NDisplay::print(char c) {

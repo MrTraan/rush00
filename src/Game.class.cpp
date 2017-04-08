@@ -3,9 +3,7 @@
 #include <stdlib.h>
 
 
-Game::Game(void) {
-
-}
+Game::Game(void) {}
 
 Game::Game(const Game& src) {
 	*this = src;
@@ -29,7 +27,7 @@ void Game::start() {
 void Game::gameLoop() {
 	while (_state == PLAYING) {
 		_inputManager.readInput();
-		_mainWindow.draw(*(new Shape(1,1, Game::_mainWindow.getX()/2, _mainWindow.getY()/2,"^")));
+		_mainWindow.draw(*(new Shape(12,3, Game::_mainWindow.getX()/2, _mainWindow.getY()/2,"__---^^---______________------------")));
 		// update
 		// draw
 		usleep(100);

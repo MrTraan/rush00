@@ -1,6 +1,5 @@
 #include "../includes/Shape.hpp"
 
-
 Shape::Shape() : _width(0), _height(0), _posX(0), _posY(0), _shape("") {}
 
 Shape::Shape(int width, int height, int posX, int posY, std::string shape)
