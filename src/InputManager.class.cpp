@@ -69,5 +69,3 @@ bool InputManager::isKeyPressed(Key key) {
 	}
 	return false;
 }
-
-Key InputManager::_keyPressed[MAX_KEY_PRESS] = {KeyNone};

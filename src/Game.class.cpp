@@ -26,10 +26,11 @@ void Game::start() {
 void Game::gameLoop() {
 	while (_state == PLAYING) {
 		_inputManager.readInput();
-		_mainWindow.waitForQuit();
+		// update
+		// draw
 		usleep(100);
 
-		if (InputManager::isKeyPressed(KeyExit)) {
+		if (_inputManager.isKeyPressed(KeyExit)) {
 			_state = EXITING;
 		}
 	}

@@ -23,8 +23,7 @@ NDisplay::~NDisplay(void) {
 	endwin();
 	// std::cout<<"Destructor called"<<std::endl;
 }
-void NDisplay::draw(Shape &shape)
-{
+void NDisplay::draw(Shape& shape) {
 	prints(shape.getshape(), shape.getPosX(), shape.getPosY());
 }
 
@@ -68,10 +67,7 @@ void NDisplay::clrW(int id) {
 	wclear(_Windows[id]);
 }
 
-void NDisplay::waitForQuit() {
-	if (InputManager::isKeyPressed(KeyExit))
-		endwin();
-}
+void NDisplay::waitForQuit() {}
 
 void NDisplay::waitForQuitW(int id, char c) {
 	if (getch() == c)

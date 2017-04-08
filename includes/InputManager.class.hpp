@@ -23,8 +23,8 @@ class InputManager {
 
 	Key readInput();
 	Key readKey();
-	static bool isKeyPressed(Key Key);
+	bool isKeyPressed(Key Key);
 
    private:
-	static Key _keyPressed[MAX_KEY_PRESS];
+	Key _keyPressed[MAX_KEY_PRESS];
 };
