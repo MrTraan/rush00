@@ -48,24 +48,20 @@ void Game::gameLoop() {
 	}
 }
 
-<<<<<<< HEAD
 InputManager& Game::getInputManager() {
-=======
+	return _inputManager;
+}
+
 void Game::GameObjectgenerator() {
+	int rdmX = rand() % 25;  // random position (0 to COLS)
+	int rdmN = rand() % 20;  // random number (0 to ...)
 
-	int rdmX = rand() % 25; // random position (0 to COLS)
-	int rdmN = rand() % 20; // random number (0 to ...)
 
-	
-	while(rdmN--)
-	{
-		GameObject* t = new GameObject (Shape(1, 1, rdmX, Game::_mainWindow.getY() - 1,"V"));
+	while (rdmN--) {
+		GameObject* t = new GameObject(
+		    Shape(1, 1, rdmX, Game::_mainWindow.getY() - 1, "V"));
 		_gameObjectManager.add("BasicEnemy", t);
 	}
-}
-InputManager const& Game::getInputManager() {
->>>>>>> 1a008eefd2bc1d0d7e4070eee4da27abf3029ed5
-	return _inputManager;
 }
 
 NDisplay& Game::getWindow() {
