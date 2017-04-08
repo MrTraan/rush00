@@ -15,3 +15,12 @@ Vector2& Vector2::operator=(const Vector2& rhs) {
 	y = rhs.y;
 	return *this;
 }
+
+Vector2 operator+(const Vector2& v1, const Vector2& v2) {
+	return Vector2(v1.x + v2.x, v2.y + v2.y);
+}
+
+std::ostream& operator<<(std::ostream& os, const Vector2& v) {
+	os << "{x: " << v.x << ", y: " << v.y << "}";
+	return os;
+}

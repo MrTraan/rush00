@@ -1,9 +1,9 @@
 #include "../includes/GameObject.class.hpp"
 //#include <debug.hpp>
 
-GameObject::GameObject(void) {}
+GameObject::GameObject(void) : alive(true) {}
 
-GameObject::GameObject(Shape s) : _shape(s) {}
+GameObject::GameObject(Shape s) : alive(true), _shape(s) {}
 
 GameObject::GameObject(const GameObject& src) {
 	*this = src;
@@ -12,7 +12,8 @@ GameObject::GameObject(const GameObject& src) {
 GameObject::~GameObject(void) {}
 
 GameObject& GameObject::operator=(const GameObject& rhs) {
-	(void)rhs;
+	_shape = rhs.getShape();
+	alive = rhs.alive;
 	return *this;
 }
 
@@ -44,6 +45,6 @@ void GameObject::setShape(Shape s) {
 	_shape = s;
 }
 
-Shape& GameObject::getShape() {
+Shape const& GameObject::getShape() const {
 	return _shape;
 }

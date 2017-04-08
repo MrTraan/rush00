@@ -18,14 +18,16 @@ class GameObject {
 	virtual void draw(NDisplay& window);
 	virtual void update();
 
-	virtual int getWidth() const;
-	virtual int getHeight() const;
+	int getWidth() const;
+	int getHeight() const;
 
-	virtual void setPosition(int x, int y);
-	virtual Vector2 getPosition() const;
+	void setPosition(int x, int y);
+	Vector2 getPosition() const;
 
 	void setShape(Shape s);
-	Shape& getShape();
+	Shape const& getShape() const;
+
+	bool alive;
 
    protected:
 	Shape _shape;
