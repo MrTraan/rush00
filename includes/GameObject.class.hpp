@@ -7,6 +7,7 @@
 class GameObject {
    public:
 	GameObject(void);
+	GameObject(Shape s);
 	GameObject(const GameObject& src);
 	virtual ~GameObject(void);
 
@@ -20,6 +21,9 @@ class GameObject {
 
 	virtual void setPosition(int x, int y);
 	virtual Vector2 getPosition() const;
+
+	void setShape(Shape s);
+	Shape& getShape();
 
    private:
 	Shape _shape;

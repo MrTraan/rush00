@@ -1,4 +1,5 @@
 #include <GameObjectManager.class.hpp>
+#include <debug.hpp>
 
 GameObjectManager::GameObjectManager(void) {}
 

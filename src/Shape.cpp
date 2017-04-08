@@ -39,7 +39,7 @@ Shape& Shape::operator=(Shape const& rhs) {
 		_height = rhs._height;
 		_posX = rhs._posX;
 		_posY = rhs._posY;
-		std::string _shape = rhs._shape;
+		_shape = rhs._shape;
 	}
 
 	return *this;

@@ -18,6 +18,11 @@ Game& Game::operator=(const Game& rhs) {
 
 
 void Game::start() {
+	GameObject* t = new GameObject(
+	    Shape(12, 3, Game::_mainWindow.getX() / 2, _mainWindow.getY() / 2,
+	          "__---^^---______________------------"));
+
+	_gameObjectManager.add("testObject", t);
 	_state = PLAYING;
 	//_mainWindow.prints("salut", _mainWindow.getX() / 2, _mainWindow.getY() /
 	// 2);
@@ -28,10 +33,9 @@ void Game::start() {
 void Game::gameLoop() {
 	while (_state == PLAYING) {
 		_inputManager.readInput();
-		_mainWindow.draw(*(new Shape(12,3, Game::_mainWindow.getX()/2, _mainWindow.getY()/2,"__---^^---______________------------")));
-		// update
-		// draw
-		usleep(100);
+		_gameObjectManager.updateAll();
+		_gameObjectManager.drawAll(_mainWindow);
+		usleep(13000);
 
 		if (_inputManager.isKeyPressed(KeyExit)) {
 			_state = EXITING;

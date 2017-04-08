@@ -1,6 +1,9 @@
 #include "GameObject.class.hpp"
+#include <debug.hpp>
 
 GameObject::GameObject(void) {}
+
+GameObject::GameObject(Shape s) : _shape(s) {}
 
 GameObject::GameObject(const GameObject& src) {
 	*this = src;
@@ -33,4 +36,12 @@ void GameObject::setPosition(int x, int y) {
 
 Vector2 GameObject::getPosition() const {
 	return _shape.getPosition();
+}
+
+void GameObject::setShape(Shape s) {
+	_shape = s;
+}
+
+Shape& GameObject::getShape() {
+	return _shape;
 }

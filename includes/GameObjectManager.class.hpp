@@ -3,6 +3,7 @@
 #include <GameObject.class.hpp>
 #include <NDisplay.hpp>
 #include <iostream>
+#include <debug.hpp>
 
 struct Node {
 	std::string name;
@@ -28,6 +29,7 @@ struct List {
 		for (itr = head; itr->next; itr = itr->next)
 			;
 		itr->next = n;
+		n->next = NULL;
 	}
 };
 
