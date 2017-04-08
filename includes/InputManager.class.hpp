@@ -23,7 +23,7 @@ class InputManager {
 
 	Key readInput();
 	Key readKey();
-	bool isKeyPressed(Key Key);
+	bool isKeyPressed(Key key) const;
 
    private:
 	Key _keyPressed[MAX_KEY_PRESS];
