@@ -23,6 +23,10 @@ NDisplay::~NDisplay(void) {
 	endwin();
 	// std::cout<<"Destructor called"<<std::endl;
 }
+void NDisplay::draw(Shape &shape)
+{
+	prints(shape.getshape(), shape.getPosX(), shape.getPosY());
+}
 
 void NDisplay::print(char c) {
 	addch(c);
