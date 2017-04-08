@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <ncurses.h>
 #include <unistd.h>
 
 #include <Input.class.hpp>
@@ -19,37 +20,23 @@ InputManager& InputManager::operator=(const InputManager& rhs) {
 }
 
 Key InputManager::readKey() {
-	char c = 0;
+	int c = getch();
 
-	if (read(0, &c, 1) == -1) {
-		return KeyNone;
-	}
-
-	if (c == '\x1b') {  // escape sequence
-		char seq[3];
-
-		if (read(0, &seq[0], 1) != 1)
-			return KeyExit;  // Escape key non followed by sequence
-		if (read(0, &seq[1], 1) != 1)
+	switch (c) {
+		case 0x20:  // space
+			return KeySpace;
+		case 'q':
+			return KeyExit;
+		case KEY_DOWN:
+			return KeyDown;
+		case KEY_UP:
+			return KeyUp;
+		case KEY_LEFT:
+			return KeyLeft;
+		case KEY_RIGHT:
+			return KeyRight;
+		default:
 			return KeyNone;
-
-		if (seq[0] == '[') {
-			switch (seq[1]) {  // Parse arrow keys
-				case 'A':
-					return KeyUp;
-				case 'B':
-					return KeyDown;
-				case 'C':
-					return KeyRight;
-				case 'D':
-					return KeyLeft;
-				default:
-					return KeyNone;
-			}
-		}
-		return KeyNone;
-	} else {
-		return charToKey(c);
 	}
 }
 
@@ -71,26 +58,16 @@ Key InputManager::readInput() {
 		i++;
 	}
 
-	return charToKey(lastInput);
+	return lastInput;
 }
 
 
 bool InputManager::isKeyPressed(Key key) {
 	for (int i = 0; i < MAX_KEY_PRESS; i++) {
-		if (_keyPressed[i] == key) {
+		if (_keyPressed[i] == key)
 			return true;
-		}
 	}
 	return false;
-}
-
-Key InputManager::charToKey(char c) {
-	switch (c) {
-		case 0x20:  // space
-			return KeySpace;
-		default:
-			return KeyNone;
-	}
 }
 
 Key InputManager::_keyPressed[MAX_KEY_PRESS] = {KeyNone};
