@@ -35,28 +35,29 @@ void Game::gameLoop() {
 	while (_state == PLAYING) {
 		_inputManager.readInput();
 		clear();
-
-		_gameObjectManager.updateAll();
+		GameObjectgenerator();
+		_gameObjectManager.updateAll(_mainWindow);
 		_gameObjectManager.drawAll(_mainWindow);
 
 		refresh();
-		usleep(8000);
+		usleep(80000);
 
 		if (_inputManager.isKeyPressed(KeyExit)) {
 			_state = EXITING;
 		}
+		Game::tick++;
 	}
 }
 
 void Game::GameObjectgenerator() {
 
-	int rdmX = rand() % 25; // random position (0 to COLS)
+	int rdmX = rand() % _mainWindow.getX(); // random position (0 to COLS)
 	int rdmN = rand() % 20; // random number (0 to ...)
 
-	
+	rdmN = 10;
 	while(rdmN--)
 	{
-		GameObject* t = new GameObject (Shape(1, 1, rdmX, Game::_mainWindow.getY() - 1,"V"));
+		GameObject* t = new GameObject (Shape(1, 1, rdmX, 0,"V"));
 		_gameObjectManager.add("BasicEnemy", t);
 	}
 }
@@ -76,3 +77,4 @@ InputManager Game::_inputManager;
 NDisplay Game::_mainWindow;
 Game::eGameState Game::_state = UNINITIALIZED;
 GameObjectManager Game::_gameObjectManager;
+int Game::tick = 0;
