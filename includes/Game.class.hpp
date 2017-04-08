@@ -27,4 +27,5 @@ class Game {
 	static NDisplay _mainWindow;
 	static InputManager _inputManager;
 	static GameObjectManager _gameObjectManager;
+	static void GameObjectgenerator();
 };

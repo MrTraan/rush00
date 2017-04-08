@@ -1,4 +1,5 @@
-#include <Game.class.hpp>
+//#include <Game.class.hpp>
+#include "../includes/Game.class.hpp"
 #include <unistd.h>
 #include <stdlib.h>
 
@@ -15,7 +16,6 @@ Game& Game::operator=(const Game& rhs) {
 	(void)rhs;
 	return *this;
 }
-
 
 void Game::start() {
 	GameObject* t = new GameObject(
@@ -43,6 +43,18 @@ void Game::gameLoop() {
 	}
 }
 
+void Game::GameObjectgenerator() {
+
+	int rdmX = rand() % 25; // random position (0 to COLS)
+	int rdmN = rand() % 20; // random number (0 to ...)
+
+	
+	while(rdmN--)
+	{
+		GameObject* t = new GameObject (Shape(1, 1, rdmX, Game::_mainWindow.getY() - 1,"V"));
+		_gameObjectManager.add("BasicEnemy", t);
+	}
+}
 InputManager const& Game::getInputManager() {
 	return _inputManager;
 }
