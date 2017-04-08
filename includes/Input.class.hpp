@@ -22,7 +22,6 @@ class InputManager {
 
 
 	Key readInput();
-	Key charToKey(char c);
 	Key readKey();
 	static bool isKeyPressed(Key Key);
 
