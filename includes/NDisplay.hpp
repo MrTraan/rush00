@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <ncurses.h>
+#include "../includes/Shape.hpp"
 
 #define NB_W_MAX 10
 
@@ -17,10 +18,12 @@ public:
 	~NDisplay(void);
 	
 	// Display function
+	void draw(Shape &shape);
+	//char
 	void print(char c);
 	void print(char c, int x, int y);
 	void print(int id, char c, int x, int y);
-
+	//string
 	void prints(std::string s);
 	void prints(std::string s, int x, int y);
 	void prints(int id, std::string s, int x, int y);
@@ -29,7 +32,8 @@ public:
 	void rfh(void);
 	void clr(void);
 	void clrW(int id);
-
+	void rfhW(int id);
+	
 	void waitForQuit(char c);
 	void waitForQuitW(int id, char c);
 	
