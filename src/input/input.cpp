@@ -18,47 +18,47 @@ InputManager& InputManager::operator=(const InputManager& rhs) {
 	return *this;
 }
 
-InputManager::Key InputManager::readKey() {
+Key InputManager::readKey() {
 	char c = 0;
 
 	if (read(0, &c, 1) == -1) {
-		return None;
+		return KeyNone;
 	}
 
 	if (c == '\x1b') {  // escape sequence
 		char seq[3];
 
 		if (read(0, &seq[0], 1) != 1)
-			return Exit;  // Escape key non followed by sequence
+			return KeyExit;  // Escape key non followed by sequence
 		if (read(0, &seq[1], 1) != 1)
-			return None;
+			return KeyNone;
 
 		if (seq[0] == '[') {
 			switch (seq[1]) {  // Parse arrow keys
 				case 'A':
-					return Up;
+					return KeyUp;
 				case 'B':
-					return Down;
+					return KeyDown;
 				case 'C':
-					return Right;
+					return KeyRight;
 				case 'D':
-					return Left;
+					return KeyLeft;
 				default:
-					return None;
+					return KeyNone;
 			}
 		}
-		return None;
+		return KeyNone;
 	} else {
 		return charToKey(c);
 	}
 }
 
-InputManager::Key InputManager::getLastInput() {
-	Key k = None;
-	Key lastInput = None;
+Key InputManager::getLastInput() {
+	Key k = KeyNone;
+	Key lastInput = KeyNone;
 	int i = 0;
 
-	while ((k = readKey()) != None) {
+	while ((k = readKey()) != KeyNone) {
 		if (i < MAX_KEY_PRESS) {
 			_keyPressed[i] = k;
 			i++;
@@ -66,8 +66,8 @@ InputManager::Key InputManager::getLastInput() {
 	}
 
 	while (i < MAX_KEY_PRESS) {
-		// Fill keyPressed with key None
-		_keyPressed[i] = None;
+		// Fill keyPressed with key KeyNone
+		_keyPressed[i] = KeyNone;
 		i++;
 	}
 
@@ -84,11 +84,11 @@ bool InputManager::isKeyPressed(Key key) {
 	return false;
 }
 
-InputManager::Key InputManager::charToKey(char c) {
+Key InputManager::charToKey(char c) {
 	switch (c) {
 		case 0x20:  // space
-			return Space;
+			return KeySpace;
 		default:
-			return None;
+			return KeyNone;
 	}
 }

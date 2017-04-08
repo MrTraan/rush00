@@ -2,6 +2,16 @@
 
 #define MAX_KEY_PRESS 3
 
+typedef enum eKey {
+	KeyUp,
+	KeyDown,
+	KeyLeft,
+	KeyRight,
+	KeySpace,
+	KeyExit,
+	KeyNone
+} Key;
+
 class InputManager {
    public:
 	InputManager();
@@ -9,7 +19,6 @@ class InputManager {
 	~InputManager();
 
 	InputManager& operator=(const InputManager& rhs);
-	typedef enum eKey { Up, Down, Left, Right, Space, Exit, None } Key;
 
 
 	Key getLastInput();
