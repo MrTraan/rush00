@@ -53,7 +53,7 @@ Key InputManager::readKey() {
 	}
 }
 
-Key InputManager::getLastInput() {
+Key InputManager::readInput() {
 	Key k = KeyNone;
 	Key lastInput = KeyNone;
 	int i = 0;

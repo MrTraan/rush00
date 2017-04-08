@@ -21,7 +21,7 @@ class InputManager {
 	InputManager& operator=(const InputManager& rhs);
 
 
-	Key getLastInput();
+	Key readInput();
 	Key charToKey(char c);
 	Key readKey();
 	static bool isKeyPressed(Key Key);
