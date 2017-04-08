@@ -2,7 +2,8 @@
 #include "../includes/Game.class.hpp"
 #include <unistd.h>
 #include <stdlib.h>
-#include <Player.class.hpp>
+//#include <Player.class.hpp>
+#include "../includes/Player.class.hpp"
 
 Game::Game(void) {}
 
