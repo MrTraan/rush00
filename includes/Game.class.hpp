@@ -14,9 +14,9 @@ class Game {
 
 	static void start();
 
-	static InputManager const& getInputManager();
-	static NDisplay const& getWindow();
-	static GameObjectManager const& getGameObjectManager();
+	static InputManager& getInputManager();
+	static NDisplay& getWindow();
+	static GameObjectManager& getGameObjectManager();
 
    private:
 	enum eGameState { PLAYING, EXITING, UNINITIALIZED };

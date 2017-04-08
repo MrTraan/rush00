@@ -1,6 +1,7 @@
 #include <Player.class.hpp>
 #include <Game.class.hpp>
 #include <debug.hpp>
+#include <Laser.class.hpp>
 
 Player::Player(void) {}
 
@@ -15,6 +16,16 @@ Player::~Player(void) {}
 Player& Player::operator=(const Player& rhs) {
 	(void)rhs;
 	return *this;
+}
+
+void Player::shoot() {
+	Vector2 pos = getPosition();
+
+	pos.y -= 1;
+	pos.x = pos.x + (getWidth() / 2);
+	Laser* l = new Laser(pos, Laser::defaultSpeed);
+
+	Game::getGameObjectManager().add("laser", l);
 }
 
 void Player::update() {
@@ -34,6 +45,10 @@ void Player::update() {
 		}
 	} else if (Game::getInputManager().isKeyPressed(KeyDown)) {
 		pos.y++;
+	}
+
+	if (Game::getInputManager().isKeyPressed(KeySpace)) {
+		shoot();
 	}
 
 	_shape.setPosition(pos);

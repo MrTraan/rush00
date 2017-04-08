@@ -39,7 +39,7 @@ void Game::gameLoop() {
 		_gameObjectManager.drawAll(_mainWindow);
 
 		refresh();
-		usleep(8000);
+		usleep(40000);
 
 		if (_inputManager.isKeyPressed(KeyExit)) {
 			_state = EXITING;
@@ -47,15 +47,15 @@ void Game::gameLoop() {
 	}
 }
 
-InputManager const& Game::getInputManager() {
+InputManager& Game::getInputManager() {
 	return _inputManager;
 }
 
-NDisplay const& Game::getWindow() {
+NDisplay& Game::getWindow() {
 	return _mainWindow;
 }
 
-GameObjectManager const& Game::getGameObjectManager() {
+GameObjectManager& Game::getGameObjectManager() {
 	return _gameObjectManager;
 }
 

@@ -12,4 +12,6 @@ class Player : public GameObject {
 	Player& operator=(const Player& rhs);
 
 	void update();
+
+	void shoot();
 };
