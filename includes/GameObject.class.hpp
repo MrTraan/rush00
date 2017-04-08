@@ -25,6 +25,6 @@ class GameObject {
 	void setShape(Shape s);
 	Shape& getShape();
 
-   private:
+   protected:
 	Shape _shape;
 };

@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <ncurses.h>
 #include <unistd.h>
+#include <debug.hpp>
 
 #include <InputManager.class.hpp>
 
@@ -28,12 +29,16 @@ Key InputManager::readKey() {
 		case 'q':
 			return KeyExit;
 		case KEY_DOWN:
+		case 'j':
 			return KeyDown;
 		case KEY_UP:
+		case 'k':
 			return KeyUp;
 		case KEY_LEFT:
+		case 'h':
 			return KeyLeft;
 		case KEY_RIGHT:
+		case 'l':
 			return KeyRight;
 		default:
 			return KeyNone;
@@ -62,7 +67,7 @@ Key InputManager::readInput() {
 }
 
 
-bool InputManager::isKeyPressed(Key key) {
+bool InputManager::isKeyPressed(Key key) const {
 	for (int i = 0; i < MAX_KEY_PRESS; i++) {
 		if (_keyPressed[i] == key)
 			return true;

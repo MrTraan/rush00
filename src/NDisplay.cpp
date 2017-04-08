@@ -7,6 +7,7 @@ NDisplay::NDisplay(void) {
 	initscr();
 	cbreak();
 	noecho();
+	keypad(stdscr, TRUE);
 	timeout(1);
 	curs_set(FALSE);
 	for (int i = 0; i < NB_W_MAX; i++)
@@ -23,11 +24,11 @@ NDisplay::~NDisplay(void) {
 	endwin();
 	// std::cout<<"Destructor called"<<std::endl;
 }
-void NDisplay::draw(Shape& shape) 
-{	
-	for (int i=0; i < shape.getHeight(); i++)
-		for (int j=0; j < shape.getWidth(); j++)
-			print(shape.getshape()[i * shape.getWidth() + j], shape.getPosX() + j, shape.getPosY() + i);
+void NDisplay::draw(Shape& shape) {
+	for (int i = 0; i < shape.getHeight(); i++)
+		for (int j = 0; j < shape.getWidth(); j++)
+			print(shape.getshape()[i * shape.getWidth() + j],
+			      shape.getPosX() + j, shape.getPosY() + i);
 }
 
 void NDisplay::print(char c) {

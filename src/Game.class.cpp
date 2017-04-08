@@ -1,7 +1,7 @@
 #include <Game.class.hpp>
 #include <unistd.h>
 #include <stdlib.h>
-
+#include <Player.class.hpp>
 
 Game::Game(void) {}
 
@@ -18,9 +18,9 @@ Game& Game::operator=(const Game& rhs) {
 
 
 void Game::start() {
-	GameObject* t = new GameObject(
-	    Shape(12, 3, Game::_mainWindow.getX() / 2, _mainWindow.getY() / 2,
-	          "__---^^---______________------------"));
+	Player* t = new Player(Shape(12, 3, Game::_mainWindow.getX() / 2,
+	                             _mainWindow.getY() / 2,
+	                             "__---^^---______________------------"));
 
 	_gameObjectManager.add("testObject", t);
 	_state = PLAYING;
@@ -32,10 +32,14 @@ void Game::start() {
 
 void Game::gameLoop() {
 	while (_state == PLAYING) {
+		clear();
+
 		_inputManager.readInput();
 		_gameObjectManager.updateAll();
 		_gameObjectManager.drawAll(_mainWindow);
-		usleep(13000);
+
+		refresh();
+		usleep(100000);
 
 		if (_inputManager.isKeyPressed(KeyExit)) {
 			_state = EXITING;
