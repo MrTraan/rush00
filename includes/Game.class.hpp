@@ -1,9 +1,8 @@
 #pragma once
-#include <NDisplay.hpp>
 #include <InputManager.class.hpp>
-#include <Shape.hpp>
 #include "../includes/Shape.hpp"
 #include "../includes/NDisplay.hpp"
+#include <GameObjectManager.class.hpp>
 
 class Game {
    public:
@@ -17,7 +16,8 @@ class Game {
 
 	static InputManager const& getInputManager();
 	static NDisplay const& getWindow();
-	Shape *test; 
+	static GameObjectManager const& getGameObjectManager();
+
    private:
 	enum eGameState { PLAYING, EXITING, UNINITIALIZED };
 
@@ -26,4 +26,5 @@ class Game {
 	static eGameState _state;
 	static NDisplay _mainWindow;
 	static InputManager _inputManager;
+	static GameObjectManager _gameObjectManager;
 };

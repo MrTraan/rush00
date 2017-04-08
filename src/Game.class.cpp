@@ -19,7 +19,8 @@ Game& Game::operator=(const Game& rhs) {
 
 void Game::start() {
 	_state = PLAYING;
-	//_mainWindow.prints("salut", _mainWindow.getX() / 2, _mainWindow.getY() / 2);
+	//_mainWindow.prints("salut", _mainWindow.getX() / 2, _mainWindow.getY() /
+	// 2);
 	gameLoop();
 	_state = EXITING;
 }
@@ -46,6 +47,11 @@ NDisplay const& Game::getWindow() {
 	return _mainWindow;
 }
 
+GameObjectManager const& Game::getGameObjectManager() {
+	return _gameObjectManager;
+}
+
 InputManager Game::_inputManager;
 NDisplay Game::_mainWindow;
 Game::eGameState Game::_state = UNINITIALIZED;
+GameObjectManager Game::_gameObjectManager;
