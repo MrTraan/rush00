@@ -2,7 +2,10 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-Game::Game(void) {}
+
+Game::Game(void) {
+
+}
 
 Game::Game(const Game& src) {
 	*this = src;
@@ -18,7 +21,7 @@ Game& Game::operator=(const Game& rhs) {
 
 void Game::start() {
 	_state = PLAYING;
-	_mainWindow.prints("salut", _mainWindow.getX() / 2, _mainWindow.getY() / 2);
+	//_mainWindow.prints("salut", _mainWindow.getX() / 2, _mainWindow.getY() / 2);
 	gameLoop();
 	_state = EXITING;
 }
@@ -26,6 +29,7 @@ void Game::start() {
 void Game::gameLoop() {
 	while (_state == PLAYING) {
 		_inputManager.readInput();
+		_mainWindow.draw(*(new Shape(1,1, Game::_mainWindow.getX()/2, _mainWindow.getY()/2,"^")));
 		// update
 		// draw
 		usleep(100);

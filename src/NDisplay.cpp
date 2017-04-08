@@ -1,5 +1,5 @@
 #include "../includes/NDisplay.hpp"
-#include <InputManager.class.hpp>
+//#include <InputManager.class.hpp>
 
 int NDisplay::sNbWindows = 0;
 
@@ -23,8 +23,13 @@ NDisplay::~NDisplay(void) {
 	endwin();
 	// std::cout<<"Destructor called"<<std::endl;
 }
-void NDisplay::draw(Shape& shape) {
-	prints(shape.getshape(), shape.getPosX(), shape.getPosY());
+void NDisplay::draw(Shape& shape) 
+{
+	for (int i=0; i < shape.getHeight(); i++)
+	{
+		for (int j=0; j < shape.getWidth(); j++)
+			print(shape.getshape()[i*(j+1)], shape.getPosX() + i, shape.getPosY() + j);
+	}
 }
 
 void NDisplay::print(char c) {
