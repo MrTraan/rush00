@@ -32,14 +32,14 @@ void Game::start() {
 
 void Game::gameLoop() {
 	while (_state == PLAYING) {
+		_inputManager.readInput();
 		clear();
 
-		_inputManager.readInput();
 		_gameObjectManager.updateAll();
 		_gameObjectManager.drawAll(_mainWindow);
 
 		refresh();
-		usleep(100000);
+		usleep(8000);
 
 		if (_inputManager.isKeyPressed(KeyExit)) {
 			_state = EXITING;
