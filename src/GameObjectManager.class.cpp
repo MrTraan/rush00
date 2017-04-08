@@ -49,7 +49,7 @@ void GameObjectManager::remove(Node *object) {
 void GameObjectManager::updateAll(NDisplay& window) {
 	for (Node* itr = _gameObjectList.begin(); itr; itr = itr->next) {
 		itr->go->update();
-		if (itr->go->getPosition().y > window.getY() - 5 || itr->go->getPosition().x < window.getX()) {
+		if (itr->go->getPosition().y > window.getY() - 5 || itr->go->getPosition().x < 0) {
 			remove(itr);
 		}
 	}

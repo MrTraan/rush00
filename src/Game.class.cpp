@@ -5,6 +5,8 @@
 //#include <Player.class.hpp>
 #include "../includes/Player.class.hpp"
 
+#define NB_ENEMY 10
+
 Game::Game(void) {}
 
 Game::Game(const Game& src) {
@@ -55,7 +57,7 @@ InputManager& Game::getInputManager() {
 
 void Game::GameObjectgenerator() {
 	int rdmX = rand() % _mainWindow.getX(); // random position (0 to COLS)
-	int rdmN = rand() % 20; // random number (0 to ...)
+	int rdmN = rand() % NB_ENEMY; // random number (0 to ...)
 
 	rdmN = 10;
 	while(rdmN--)
