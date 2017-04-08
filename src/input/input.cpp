@@ -92,3 +92,5 @@ Key InputManager::charToKey(char c) {
 			return KeyNone;
 	}
 }
+
+Key InputManager::_keyPressed[MAX_KEY_PRESS] = {KeyNone};

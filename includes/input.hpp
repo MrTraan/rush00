@@ -22,10 +22,10 @@ class InputManager {
 
 
 	Key getLastInput();
-	bool isKeyPressed(Key Key);
 	Key charToKey(char c);
 	Key readKey();
+	static bool isKeyPressed(Key Key);
 
    private:
-	Key _keyPressed[MAX_KEY_PRESS];
+	static Key _keyPressed[MAX_KEY_PRESS];
 };
