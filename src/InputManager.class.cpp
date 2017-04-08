@@ -2,7 +2,7 @@
 #include <ncurses.h>
 #include <unistd.h>
 
-#include <Input.class.hpp>
+#include <InputManager.class.hpp>
 
 InputManager::InputManager() {}
 

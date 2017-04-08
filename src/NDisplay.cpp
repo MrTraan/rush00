@@ -1,5 +1,5 @@
 #include "../includes/NDisplay.hpp"
-#include <Input.class.hpp>
+#include <InputManager.class.hpp>
 
 int NDisplay::sNbWindows = 0;
 
