@@ -16,7 +16,7 @@ class NDisplay {
 	~NDisplay(void);
 
 	// Display function
-	void draw(Shape &shape);
+	void draw(Shape& shape);
 	//char
 	void print(char c);
 	void print(char c, int x, int y);
