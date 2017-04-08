@@ -1,6 +1,5 @@
 #pragma once
 #include <InputManager.class.hpp>
-#include "../includes/Shape.hpp"
 #include "../includes/NDisplay.hpp"
 #include <GameObjectManager.class.hpp>
 
@@ -27,4 +26,5 @@ class Game {
 	static NDisplay _mainWindow;
 	static InputManager _inputManager;
 	static GameObjectManager _gameObjectManager;
+	static void GameObjectgenerator();
 };

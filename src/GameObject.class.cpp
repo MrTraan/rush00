@@ -1,5 +1,5 @@
-#include "GameObject.class.hpp"
-#include <debug.hpp>
+#include "../includes/GameObject.class.hpp"
+//#include <debug.hpp>
 
 GameObject::GameObject(void) : alive(true) {}
 
@@ -21,7 +21,9 @@ void GameObject::draw(NDisplay& window) {
 	window.draw(_shape);
 }
 
-void GameObject::update() {}
+void GameObject::update() {
+	setPosition(getPosition().x, getPosition().y + 1);
+}
 
 int GameObject::getWidth() const {
 	return _shape.getWidth();
