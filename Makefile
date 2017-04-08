@@ -1,25 +1,35 @@
-NAME = schmup
+NAME = schmup.out
 
-CPP_FILES = ./src/main.cpp
+CPP_DIR = src
+CPP_DIRS = $(shell find $(CPP_DIR) -type d -follow -print | grep -v '/tests_')
+CPP_FILES = $(shell find $(CPP_DIRS) -type f -follow -print | grep "\.cpp" | grep -v '.swp')
 
-O_FILES = $(CPP_FILES:%.cpp=%.o)
+O_DIR =	.tmp/obj
+O_DIRS = $(CPP_DIRS:$(CPP_DIR)%=$(O_DIR)%)
+O_FILES = $(CPP_FILES:$(CPP_DIR)%.cpp=$(O_DIR)%.o)
+
+FLAGS = -Wall -Wextra -Werror
+INCLUDES = -I ./includes 
+LIB = -l ncurses
 
 CC = clang++
-FLAGS = -Wall -Werror -Wextra
 
 all: $(NAME)
 
 $(NAME): $(O_FILES)
-	$(CC) $(FLAGS) $^ $(INCLUDES) -o $@
+	echo $^
+	$(CC) $(FLAGS) $^ $(INCLUDES) $(LIB) -o $@
 
-%.o: %.cpp
+$(O_DIR)%.o: $(CPP_DIR)%.cpp
+	@mkdir -p $(O_DIRS) $(O_DIR)
 	$(CC) $(FLAGS) $(INCLUDES) -o $@ -c $<
 
 clean:
-	rm -f $(O_FILES)
+	@rm -Rf $(O_DIR)
 
 fclean: clean
-	rm -f $(NAME)
+	@rm $(NAME) || true
+	@rm -Rf .tmp/
 
 re: fclean all
 
