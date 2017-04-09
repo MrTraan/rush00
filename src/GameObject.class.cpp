@@ -1,5 +1,4 @@
 #include "../includes/GameObject.class.hpp"
-//#include <debug.hpp>
 
 GameObject::GameObject(void) : alive(true) {}
 
@@ -21,9 +20,7 @@ void GameObject::draw(NDisplay& window) {
 	window.draw(_shape);
 }
 
-void GameObject::update() {
-	setPosition(getPosition().x, getPosition().y + 1);
-}
+void GameObject::update() {}
 
 int GameObject::getWidth() const {
 	return _shape.getWidth();
@@ -47,4 +44,29 @@ void GameObject::setShape(Shape s) {
 
 Shape const& GameObject::getShape() const {
 	return _shape;
+}
+
+void GameObject::collideWithPlayerLaser() {}
+void GameObject::collideWithEnnemy() {}
+void GameObject::collideWithEnnemyLaser() {}
+
+bool valueInRange(int value, int min, int max) {
+	return (value >= min) && (value <= max);
+}
+
+bool GameObject::collide(GameObject& go) {
+	Shape const& oShape = go.getShape();
+
+	bool xOverlap = valueInRange(_shape.getPosX(), oShape.getPosX(),
+	                             oShape.getPosX() + oShape.getWidth()) ||
+	                valueInRange(oShape.getPosX(), _shape.getPosX(),
+	                             _shape.getPosX() + _shape.getWidth());
+
+	bool yOverlap = valueInRange(_shape.getPosY(), oShape.getPosY(),
+	                             oShape.getPosY() + oShape.getHeight()) ||
+
+	                valueInRange(oShape.getPosY(), _shape.getPosY(),
+	                             _shape.getPosY() + _shape.getHeight());
+
+	return xOverlap && yOverlap;
 }

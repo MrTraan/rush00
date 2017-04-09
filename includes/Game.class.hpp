@@ -17,8 +17,12 @@ class Game {
 	static NDisplay& getWindow();
 	static GameObjectManager& getGameObjectManager();
 
+	static void triggerLose();
+
+	static int tick;
+
    private:
-	enum eGameState { PLAYING, EXITING, UNINITIALIZED };
+	enum eGameState { PLAYING, EXITING, UNINITIALIZED, LOST };
 
 	static void gameLoop();
 	static bool isExiting();

@@ -1,13 +1,15 @@
 #include "Laser.class.hpp"
 #include <debug.hpp>
 #include <sstream>
+#include <GameObjectManager.class.hpp>
+#include <Game.class.hpp>
 
 Laser::Laser(void) : _speed(Laser::defaultSpeed) {
-	_shape = Shape(1, 1, 0, 0, "|");
+	_shape = Shape(2, 1, 0, 0, "||");
 }
 
 Laser::Laser(Vector2 pos, Vector2 speed) : _speed(speed) {
-	_shape = Shape(1, 1, pos.x, pos.y, "|");
+	_shape = Shape(2, 1, pos.x, pos.y, "||");
 }
 
 Laser::Laser(const Laser& src) {
@@ -41,6 +43,17 @@ void Laser::update() {
 	pos.x += _speed.x;
 
 	_shape.setPosition(pos);
+
+	for (Node* itr = Game::getGameObjectManager()._gameObjectList.begin(); itr;
+	     itr = itr->next) {
+		if (itr->go != this) {  // prevent self collision
+			if (collide(*(itr->go))) {
+				itr->go->collideWithPlayerLaser();
+				alive = false;
+				break;
+			}
+		}
+	}
 }
 
 Vector2 Laser::defaultSpeed(0, -1);

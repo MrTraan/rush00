@@ -14,4 +14,6 @@ class Player : public GameObject {
 	void update();
 
 	void shoot();
+
+	void collideWithEnnemy();
 };

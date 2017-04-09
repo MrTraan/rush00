@@ -1,9 +1,8 @@
-//#include <Game.class.hpp>
-#include "../includes/Game.class.hpp"
 #include <unistd.h>
 #include <stdlib.h>
-//#include <Player.class.hpp>
+#include "../includes/Game.class.hpp"
 #include "../includes/Player.class.hpp"
+#include "../includes/Ennemy.class.hpp"
 
 #define NB_ENEMY 10
 
@@ -21,13 +20,15 @@ Game& Game::operator=(const Game& rhs) {
 }
 
 void Game::start() {
-	Player* t = new Player(Shape(12, 3, Game::_mainWindow.getX() / 2,
-	                             _mainWindow.getY() / 2,
-	                             "__---^^---______________------------"));
+	//	Player* t = new Player(Shape(12, 3, Game::_mainWindow.getX() / 2,
+	//	                             _mainWindow.getY() / 2,
+	//	                             "__---^^---______________------------"));
+	Player* t = new Player(Shape(2, 1, Game::_mainWindow.getX() / 2,
+	                             _mainWindow.getY() / 2, "{}"));
 
 	_gameObjectManager.add("testObject", t);
-	_state = PLAYING;
 
+	_state = PLAYING;
 	gameLoop();
 	_state = EXITING;
 }
@@ -41,7 +42,7 @@ void Game::gameLoop() {
 		_gameObjectManager.drawAll(_mainWindow);
 
 		refresh();
-		usleep(80000);
+		usleep(13000);
 
 		if (_inputManager.isKeyPressed(KeyExit)) {
 			_state = EXITING;
@@ -54,14 +55,15 @@ InputManager& Game::getInputManager() {
 }
 
 void Game::GameObjectgenerator() {
-	int rdmX = rand() % _mainWindow.getX() - 35; // random position (0 to COLS - 35)
-	int rdmN = rand() % NB_ENEMY; // random number (0 to ...)
+	int rdmX = rand() % _mainWindow.getX();  // random position (0 to COLS)
+	int rdmN = rand() % NB_ENEMY;            // random number (0 to ...)
 
-	rdmN = 10;
-	while(rdmN--)
-	{
-		GameObject* t = new GameObject (Shape(1, 1, rdmX, 0,"V"));
-		_gameObjectManager.add("BasicEnemy", t);
+	rdmN = 1;
+	if (tick % 10 == 0) {
+		while (rdmN--) {
+			Ennemy* t = new Ennemy(Shape(1, 1, rdmX, 0, "V"));
+			_gameObjectManager.add("BasicEnemy", t);
+		}
 	}
 }
 
@@ -73,7 +75,13 @@ GameObjectManager& Game::getGameObjectManager() {
 	return _gameObjectManager;
 }
 
+void Game::triggerLose() {
+	_state = LOST;
+}
+
 InputManager Game::_inputManager;
 NDisplay Game::_mainWindow;
 Game::eGameState Game::_state = UNINITIALIZED;
 GameObjectManager Game::_gameObjectManager;
+int Game::tick = 0;
+

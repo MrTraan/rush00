@@ -46,7 +46,7 @@ class GameObjectManager {
 
 	void updateAll(NDisplay& window);
 	void drawAll(NDisplay& window);
+	void cleanup();
 
-   private:
 	List _gameObjectList;
 };

@@ -22,7 +22,7 @@ void Player::shoot() {
 	Vector2 pos = getPosition();
 
 	pos.y -= 1;
-	pos.x = pos.x + (getWidth() / 2);
+	pos.x = pos.x + (getWidth() / 2) - 1;
 	Laser* l = new Laser(pos, Laser::defaultSpeed);
 
 	Game::getGameObjectManager().add("laser", l);
@@ -54,4 +54,9 @@ void Player::update() {
 	}
 
 	_shape.setPosition(pos);
+}
+
+void Player::collideWithEnnemy() {
+	alive = false;
+	Game::triggerLose();
 }
