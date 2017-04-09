@@ -1,6 +1,8 @@
 #pragma once
 
-#include "../includes/GameObject.class.hpp"
+#include "GameObject.class.hpp"
+#include "game.class.hpp"
+#include "Vector2.class.hpp"
 
 class Ennemy : public GameObject {
    public:
@@ -13,5 +15,6 @@ class Ennemy : public GameObject {
 
 	void collideWithPlayerLaser();
 
-	void update();
+	virtual void update();
+
 };

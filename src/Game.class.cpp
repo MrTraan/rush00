@@ -3,6 +3,7 @@
 #include "../includes/Game.class.hpp"
 #include "../includes/Player.class.hpp"
 #include "../includes/Ennemy.class.hpp"
+#include "../includes/Zorg.hpp"
 
 #define NB_ENEMY 10
 
@@ -37,7 +38,7 @@ void Game::gameLoop() {
 	while (_state == PLAYING) {
 		_inputManager.readInput();
 		clear();
-		GameObjectGenerator();
+		EnnemyGenerator();
 		_gameObjectManager.updateAll(_mainWindow);
 		_gameObjectManager.drawAll(_mainWindow);
 
@@ -55,21 +56,26 @@ InputManager& Game::getInputManager() {
 	return _inputManager;
 }
 
-void Game::GameObjectGenerator() {
+void Game::EnnemyGenerator() {
 	int rdmX = rand() % (_mainWindow.getX() - _mainWindow.getBoundaries().x - _mainWindow.getBoundaries().y) + 
 		_mainWindow.getBoundaries().x;  			// random position (in boundaries)
 	int rdmN = rand() % NB_ENEMY;            		// random number (0 to ...)
 
 	rdmN = 1;
-	if (tick % 10 == 0) {
+	if (tick % 20 == 0) {
 		while (rdmN--) {
 			Ennemy* t = new Ennemy(Shape(1, 1, rdmX, 0, "V"));
 			_gameObjectManager.add("BasicEnemy", t);
+			Zorg* z = new Zorg(Shape(1, 1, rdmX, 0, "Z"));
+			_gameObjectManager.add("ZEnemy", z);
 		}
 	}
 }
 
+void EnvironmentGenerator() {
 
+
+}
 
 NDisplay& Game::getWindow() {
 	return _mainWindow;

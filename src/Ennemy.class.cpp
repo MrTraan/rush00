@@ -1,5 +1,4 @@
 #include "../includes/Ennemy.class.hpp"
-#include "../includes/Game.class.hpp"
 
 Ennemy::Ennemy(void) {}
 
