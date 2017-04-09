@@ -53,3 +53,8 @@ void Player::update() {
 
 	_shape.setPosition(pos);
 }
+
+void Player::collideWithEnnemy() {
+	alive = false;
+	Game::triggerLose();
+}

@@ -16,6 +16,11 @@ class GameObject {
 	virtual void draw(NDisplay& window);
 	virtual void update();
 
+	virtual bool collide(GameObject& go);
+	virtual void collideWithPlayerLaser();
+	virtual void collideWithEnnemy();
+	virtual void collideWithEnnemyLaser();
+
 	int getWidth() const;
 	int getHeight() const;
 

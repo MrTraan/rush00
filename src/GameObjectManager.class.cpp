@@ -1,5 +1,4 @@
-#include <GameObjectManager.class.hpp>
-#include <debug.hpp>
+#include "../includes/GameObjectManager.class.hpp"
 
 GameObjectManager::GameObjectManager(void) {}
 
@@ -37,6 +36,7 @@ void GameObjectManager::remove(std::string name) {
 	while (itr) {
 		if (itr->name == name) {
 			prev->next = itr->next;
+			delete itr->go;
 			delete itr;
 			return;
 		}
@@ -49,10 +49,36 @@ void GameObjectManager::updateAll() {
 	for (Node* itr = _gameObjectList.begin(); itr; itr = itr->next) {
 		itr->go->update();
 	}
+
+	cleanup();
 }
 
 void GameObjectManager::drawAll(NDisplay& window) {
 	for (Node* itr = _gameObjectList.begin(); itr; itr = itr->next) {
 		itr->go->draw(window);
+	}
+}
+
+void GameObjectManager::cleanup() {
+	Node* itr = _gameObjectList.begin();
+	Node* prev = NULL;
+
+	while (itr) {
+		if (!itr->go->alive) {
+			if (!prev) {
+				_gameObjectList.head = itr->next;
+				delete itr->go;
+				delete itr;
+				itr = _gameObjectList.begin();
+			} else {
+				prev->next = itr->next;
+				delete itr->go;
+				delete itr;
+				itr = prev->next;
+			}
+		} else {
+			prev = itr;
+			itr = itr->next;
+		}
 	}
 }
