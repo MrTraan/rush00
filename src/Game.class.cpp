@@ -47,6 +47,7 @@ void Game::gameLoop() {
 		if (_inputManager.isKeyPressed(KeyExit)) {
 			_state = EXITING;
 		}
+		tick++;
 	}
 }
 

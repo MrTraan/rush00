@@ -50,7 +50,7 @@ void GameObjectManager::updateAll(NDisplay& window) {
 	for (Node* itr = _gameObjectList.begin(); itr; itr = itr->next) {
 		itr->go->update();
 		
-		if (itr->go->getPosition().y > window.getY() - 5 ||
+		if (itr->go->getPosition().y > window.getY() + 1 ||
 		    itr->go->getPosition().x < 0) {
 			remove(itr);
 		}
