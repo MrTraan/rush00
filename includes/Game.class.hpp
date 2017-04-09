@@ -19,6 +19,8 @@ class Game {
 
 	static void triggerLose();
 
+	static int tick;
+
    private:
 	enum eGameState { PLAYING, EXITING, UNINITIALIZED, LOST };
 

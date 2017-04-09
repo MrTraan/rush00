@@ -1,8 +1,10 @@
 #pragma once
 
-#include <Shape.hpp>
+//#include <Shape.hpp>
+
 #include <NDisplay.hpp>
-#include <Vector2.class.hpp>
+//#include <Vector2.class.hpp>
+#include "../includes/Vector2.class.hpp"
 
 class GameObject {
    public:
@@ -34,4 +36,5 @@ class GameObject {
 
    protected:
 	Shape _shape;
+	
 };

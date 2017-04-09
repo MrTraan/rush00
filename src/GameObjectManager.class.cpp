@@ -1,4 +1,5 @@
 #include "../includes/GameObjectManager.class.hpp"
+#include "../includes/GameObjectManager.class.hpp"
 
 GameObjectManager::GameObjectManager(void) {}
 
@@ -23,18 +24,18 @@ void GameObjectManager::add(std::string name, GameObject* go) {
 	_gameObjectList.push(n);
 }
 
-void GameObjectManager::remove(std::string name) {
+void GameObjectManager::remove(Node* object) {
 	Node* prev;
 	Node* itr = _gameObjectList.begin();
 
-	if (itr->name == name) {
+	if (itr == object) {
 		_gameObjectList.head = itr->next;
 		delete itr;
 		return;
 	}
 
 	while (itr) {
-		if (itr->name == name) {
+		if (itr == object) {
 			prev->next = itr->next;
 			delete itr->go;
 			delete itr;
@@ -45,9 +46,13 @@ void GameObjectManager::remove(std::string name) {
 	}
 }
 
-void GameObjectManager::updateAll() {
+void GameObjectManager::updateAll(NDisplay& window) {
 	for (Node* itr = _gameObjectList.begin(); itr; itr = itr->next) {
 		itr->go->update();
+		if (itr->go->getPosition().y > window.getY() - 5 ||
+		    itr->go->getPosition().x < 0) {
+			remove(itr);
+		}
 	}
 
 	cleanup();

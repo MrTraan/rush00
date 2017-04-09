@@ -4,6 +4,8 @@
 #include "../includes/Player.class.hpp"
 #include "../includes/Ennemy.class.hpp"
 
+#define NB_ENEMY 10
+
 Game::Game(void) {}
 
 Game::Game(const Game& src) {
@@ -18,18 +20,13 @@ Game& Game::operator=(const Game& rhs) {
 }
 
 void Game::start() {
-	Player* t = new Player(Shape(12, 3, Game::_mainWindow.getX() / 2,
-	                             _mainWindow.getY() / 2,
-	                             "__---^^---______________------------"));
+	//	Player* t = new Player(Shape(12, 3, Game::_mainWindow.getX() / 2,
+	//	                             _mainWindow.getY() / 2,
+	//	                             "__---^^---______________------------"));
+	Player* t = new Player(Shape(2, 1, Game::_mainWindow.getX() / 2,
+	                             _mainWindow.getY() / 2, "{}"));
 
 	_gameObjectManager.add("testObject", t);
-
-	for (int j = 4; j < 8; j++) {
-		for (int i = 0; i < Game::_mainWindow.getX(); i++) {
-			Ennemy* e = new Ennemy(Shape(1, 1, i, j, "%"));
-			_gameObjectManager.add("testEnnemy", e);
-		}
-	}
 
 	_state = PLAYING;
 	gameLoop();
@@ -40,8 +37,8 @@ void Game::gameLoop() {
 	while (_state == PLAYING) {
 		_inputManager.readInput();
 		clear();
-
-		_gameObjectManager.updateAll();
+		GameObjectgenerator();
+		_gameObjectManager.updateAll(_mainWindow);
 		_gameObjectManager.drawAll(_mainWindow);
 
 		refresh();
@@ -50,6 +47,7 @@ void Game::gameLoop() {
 		if (_inputManager.isKeyPressed(KeyExit)) {
 			_state = EXITING;
 		}
+		Game::tick++;
 	}
 }
 
@@ -58,14 +56,15 @@ InputManager& Game::getInputManager() {
 }
 
 void Game::GameObjectgenerator() {
-	int rdmX = rand() % 25;  // random position (0 to COLS)
-	int rdmN = rand() % 20;  // random number (0 to ...)
+	int rdmX = rand() % _mainWindow.getX();  // random position (0 to COLS)
+	int rdmN = rand() % NB_ENEMY;            // random number (0 to ...)
 
-
-	while (rdmN--) {
-		GameObject* t = new GameObject(
-		    Shape(1, 1, rdmX, Game::_mainWindow.getY() - 1, "V"));
-		_gameObjectManager.add("BasicEnemy", t);
+	rdmN = 1;
+	if (tick % 10 == 0) {
+		while (rdmN--) {
+			Ennemy* t = new Ennemy(Shape(1, 1, rdmX, 0, "V"));
+			_gameObjectManager.add("BasicEnemy", t);
+		}
 	}
 }
 
@@ -85,3 +84,4 @@ InputManager Game::_inputManager;
 NDisplay Game::_mainWindow;
 Game::eGameState Game::_state = UNINITIALIZED;
 GameObjectManager Game::_gameObjectManager;
+int Game::tick = 0;

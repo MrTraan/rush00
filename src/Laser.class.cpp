@@ -5,11 +5,11 @@
 #include <Game.class.hpp>
 
 Laser::Laser(void) : _speed(Laser::defaultSpeed) {
-	_shape = Shape(1, 1, 0, 0, "|");
+	_shape = Shape(2, 1, 0, 0, "||");
 }
 
 Laser::Laser(Vector2 pos, Vector2 speed) : _speed(speed) {
-	_shape = Shape(1, 1, pos.x, pos.y, "|");
+	_shape = Shape(2, 1, pos.x, pos.y, "||");
 }
 
 Laser::Laser(const Laser& src) {

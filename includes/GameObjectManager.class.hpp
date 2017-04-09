@@ -42,9 +42,9 @@ class GameObjectManager {
 	GameObjectManager& operator=(const GameObjectManager& rhs);
 
 	void add(std::string name, GameObject* go);
-	void remove(std::string name);
+	void remove(Node *);
 
-	void updateAll();
+	void updateAll(NDisplay& window);
 	void drawAll(NDisplay& window);
 	void cleanup();
 
