@@ -8,7 +8,6 @@ int NDisplay::sNbWindows = 0;
 void resizeHandler(int u)
 {
 	u = 0;
-	std::cout<<"resize not allowed !"<<std::endl;
 	Game::triggerLose();
 	std::cout<<"resize not allowed !"<<std::endl;
 }

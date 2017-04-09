@@ -27,10 +27,10 @@ void Game::start() {
 		exit(0);
 	}
 
-	Player* t = new Player(Shape(2, 1, Game::_mainWindow.getX() / 2,
-	                             _mainWindow.getY() / 2, "{}"));
+	Player* t = new Player(Shape(7, 1, Game::_mainWindow.getX() / 2,
+								 _mainWindow.getY() - _mainWindow.getY() / 5, "__{!}__"));
 
-	_gameObjectManager.add("testObject", t);
+	_gameObjectManager.add("Player", t);
 
 	_state = PLAYING;
 	gameLoop();
@@ -51,7 +51,7 @@ void Game::gameLoop() {
 
 		refresh();
 		diff = clock() - _time;
-		usleep(13000 - diff);
+		usleep(20000 - diff);
 
 		if (_inputManager.isKeyPressed(KeyExit)) {
 			_state = EXITING;
@@ -76,9 +76,9 @@ void Game::ennemyGenerator() {
 	rdmN = 1;
 	if (tick % 20 == 0) {
 		while (rdmN--) {
-			Ennemy* t = new Ennemy(Shape(1, 1, rdmX, 0, "V"));
+			Ennemy* t = new Ennemy(Shape(3, 1, rdmX - 3, 0, "vvv"));
 			_gameObjectManager.add("BasicEnemy", t);
-			Zorg* z = new Zorg(Shape(1, 1, rdmX, 0, "Z"));
+			Zorg* z = new Zorg(Shape(4, 2, rdmX - 21, 0, "zzz  zzz"));
 			_gameObjectManager.add("ZEnemy", z);
 		}
 	}
@@ -106,27 +106,35 @@ void Game::userInterface() {
 
 	for (int i = 0; i < _mainWindow.getY(); i++) {
 		_mainWindow.prints(
-		    "**", _mainWindow.getX() - _mainWindow.getBoundaries().y / 2, i);
+		    "**", _mainWindow.getX() - _mainWindow.getBoundaries().y, i);
 		_mainWindow.prints("**", _mainWindow.getX() - 2, i);
 	}
 	
-	for (int i = _mainWindow.getX() - _mainWindow.getBoundaries().y / 2;
+	for (int i = _mainWindow.getX() - _mainWindow.getBoundaries().y;
 	     i < _mainWindow.getX(); i++) {
 		_mainWindow.print('*', i, 0);
 		_mainWindow.print('*', i, _mainWindow.getY() - 1);
 	}
-	mvprintw(5, _mainWindow.getX() - _mainWindow.getBoundaries().y / 3,
+	mvprintw(5, _mainWindow.getX() - _mainWindow.getBoundaries().y + 10,
 	         "Score : %d", score);
 
-	_mainWindow.prints("Life :", _mainWindow.getX() - _mainWindow.getBoundaries().y / 3, 8);
+	_mainWindow.prints("Life :", _mainWindow.getX() - _mainWindow.getBoundaries().y + 10, 8);
 	attron(COLOR_PAIR(2));
-	for (int i = 0; i < (life / 10) * 2; i++){
+	for (int i = 0; i < life / 2; i++){
 		
 		attron(A_REVERSE);
-		_mainWindow.print(' ', i + _mainWindow.getX() - _mainWindow.getBoundaries().y / 3, 9);
+		_mainWindow.print(' ', i + _mainWindow.getX() - _mainWindow.getBoundaries().y + 10 , 9);
 		attroff(A_REVERSE);
 	}
 	attroff(COLOR_PAIR(2));
+
+	_mainWindow.prints("Press 'q' to quit the game", _mainWindow.getX() - _mainWindow.getBoundaries().y + 10, 15);
+
+	for (int i = 88; i <90;i++)
+	{
+		for (int j = 0; j < _mainWindow.getY();j++)
+		_mainWindow.print('*', i,j);
+	}
 }
 
 NDisplay& Game::getWindow() {

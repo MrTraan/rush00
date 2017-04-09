@@ -4,6 +4,8 @@
 #include "GameObject.class.hpp"
 #include "Game.class.hpp"
 
+#define IND 22
+
 class Zorg : public GameObject {
    public:
    public:
@@ -19,6 +21,6 @@ class Zorg : public GameObject {
 	virtual void update();
 
    protected:
-	Vector2 _behaviour[11];
+	Vector2 _behaviour[IND];
 	int _ind;
 };
