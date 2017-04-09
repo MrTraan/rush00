@@ -35,12 +35,12 @@ void Player::update() {
 	Vector2 pos = _shape.getPosition();
 
 	if (Game::getInputManager().isKeyPressed(KeyLeft)) {
-		if (pos.x > 1) {
-			pos.x--;
+		if (pos.x > 2 + 100) {
+			pos.x -= 2;
 		}
 	} else if (Game::getInputManager().isKeyPressed(KeyRight)) {
-		if (pos.x < COLS - getWidth())
-			pos.x++;
+		if (pos.x < COLS - getWidth() - 120)
+			pos.x += 2;
 	}
 
 	if (Game::getInputManager().isKeyPressed(KeyUp)) {

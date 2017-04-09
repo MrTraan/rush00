@@ -1,26 +1,39 @@
 #include "../includes/NDisplay.hpp"
 //#include <InputManager.class.hpp>
+#include "../includes/Game.class.hpp"
+#include <signal.h>
 
 int NDisplay::sNbWindows = 0;
 
+void resizeHandler(int u)
+{
+	u = 0;
+	std::cout<<"resize not allowed !"<<std::endl;
+	Game::triggerLose();
+	std::cout<<"resize not allowed !"<<std::endl;
+}
+
 NDisplay::NDisplay(int l, int r) {
 	initscr();
+	//color handling
 	start_color();
 	init_color(COLOR_CYAN, 150,150, 150);
 	init_color(COLOR_RED, 900,0, 0);
 	init_pair(1, COLOR_CYAN,COLOR_BLACK);
 	init_pair(2, COLOR_RED,COLOR_BLACK);
+	//end color
+
 	_boundaries.x = l;
 	_boundaries.y = r;
-	subWinStdr(0,50, getY(),0, getX() - 50);
+
 	cbreak();
 	noecho();
 	keypad(stdscr, TRUE);
 	timeout(1);
 	curs_set(FALSE);
+	signal(SIGWINCH, resizeHandler);
 	for (int i = 0; i < NB_W_MAX; i++)
 		_Windows[i] = NULL;
-	// std::cout<<"Default constructor called"<<std::endl;
 }
 
 NDisplay::NDisplay(NDisplay const& src) {

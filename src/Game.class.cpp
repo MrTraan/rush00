@@ -21,6 +21,12 @@ Game& Game::operator=(const Game& rhs) {
 }
 
 void Game::start() {
+	if (_mainWindow.getX() < 70 || _mainWindow.getY() < 70)
+	{
+		std::cout<<"Window too small"<<std::endl;
+		exit(0);
+	}
+
 	Player* t = new Player(Shape(2, 1, Game::_mainWindow.getX() / 2,
 	                             _mainWindow.getY() / 2, "{}"));
 
@@ -136,7 +142,7 @@ void Game::triggerLose() {
 }
 
 InputManager Game::_inputManager;
-NDisplay Game::_mainWindow(30, 120);
+NDisplay Game::_mainWindow(100, 120);
 Game::eGameState Game::_state = UNINITIALIZED;
 GameObjectManager Game::_gameObjectManager;
 int Game::tick = 0;
