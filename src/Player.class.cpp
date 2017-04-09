@@ -59,6 +59,9 @@ void Player::update() {
 }
 
 void Player::collideWithEnnemy() {
-	alive = false;
-	Game::triggerLose();
+	Game::life--;
+	if (Game::life == 0){
+		alive = false;
+		Game::triggerLose();
+	}
 }

@@ -18,7 +18,7 @@ Zorg::Zorg(Shape s) : GameObject(s) {
 	_behaviour[4].x = 1;
 	_behaviour[4].y = 0;
 
-	_behaviour[5].x = 1;			//c'est degeu je sais...dsl :p
+	_behaviour[5].x = 1;			//c'est degeu, je sais...dsl :p
 	_behaviour[5].y = 0;
 
 	_behaviour[6].x = -1;

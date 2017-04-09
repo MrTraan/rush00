@@ -6,8 +6,10 @@ int NDisplay::sNbWindows = 0;
 NDisplay::NDisplay(int l, int r) {
 	initscr();
 	start_color();
-	init_color(COLOR_RED, 200,200,200);
-	init_pair(1, COLOR_RED,COLOR_BLACK);
+	init_color(COLOR_CYAN, 150,150, 150);
+	init_color(COLOR_RED, 900,0, 0);
+	init_pair(1, COLOR_CYAN,COLOR_BLACK);
+	init_pair(2, COLOR_RED,COLOR_BLACK);
 	_boundaries.x = l;
 	_boundaries.y = r;
 	subWinStdr(0,50, getY(),0, getX() - 50);

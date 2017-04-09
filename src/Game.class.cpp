@@ -51,7 +51,7 @@ void Game::gameLoop() {
 			_state = EXITING;
 		}
 		tick++;
-		if (!tick % 1000000 == 0)
+		if (!tick % 100000000 == 0)
 			score++;
 	}
 }
@@ -111,6 +111,16 @@ void Game::userInterface() {
 	}
 	mvprintw(5, _mainWindow.getX() - _mainWindow.getBoundaries().y / 3,
 	         "Score : %d", score);
+
+	_mainWindow.prints("Life :", _mainWindow.getX() - _mainWindow.getBoundaries().y / 3, 8);
+	attron(COLOR_PAIR(2));
+	for (int i = 0; i < (life / 10) * 2; i++){
+		
+		attron(A_REVERSE);
+		_mainWindow.print(' ', i + _mainWindow.getX() - _mainWindow.getBoundaries().y / 3, 9);
+		attroff(A_REVERSE);
+	}
+	attroff(COLOR_PAIR(2));
 }
 
 NDisplay& Game::getWindow() {
@@ -131,5 +141,5 @@ Game::eGameState Game::_state = UNINITIALIZED;
 GameObjectManager Game::_gameObjectManager;
 int Game::tick = 0;
 int Game::score = 0;
-int Game::life = 0;
+int Game::life = 100;
 clock_t Game::_time = 0;
