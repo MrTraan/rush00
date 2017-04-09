@@ -5,6 +5,9 @@ int NDisplay::sNbWindows = 0;
 
 NDisplay::NDisplay(int l, int r) {
 	initscr();
+	start_color();
+	init_color(COLOR_RED, 200,200,200);
+	init_pair(1, COLOR_RED,COLOR_BLACK);
 	_boundaries.x = l;
 	_boundaries.y = r;
 	subWinStdr(0,50, getY(),0, getX() - 50);
@@ -28,10 +31,13 @@ NDisplay::~NDisplay(void) {
 	// std::cout<<"Destructor called"<<std::endl;
 }
 void NDisplay::draw(Shape& shape) {
+	if (shape.getshape() == "o")
+		 attron(COLOR_PAIR(1));
 	for (int i = 0; i < shape.getHeight(); i++)
 		for (int j = 0; j < shape.getWidth(); j++)
 			print(shape.getshape()[i * shape.getWidth() + j],
 			      shape.getPosX() + j, shape.getPosY() + i);
+	 attroff(COLOR_PAIR(1));
 }
 
 void NDisplay::print(char c) {
