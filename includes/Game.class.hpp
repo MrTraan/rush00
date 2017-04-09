@@ -1,7 +1,8 @@
 #pragma once
 #include <InputManager.class.hpp>
-#include "../includes/NDisplay.hpp"
+#include "NDisplay.hpp"
 #include <GameObjectManager.class.hpp>
+#include <ctime>
 
 
 class Game {
@@ -37,5 +38,6 @@ class Game {
 	static void ennemyGenerator();
 	static void environmentGenerator();
 	static void userInterface();
+	static clock_t _time;
 
 };

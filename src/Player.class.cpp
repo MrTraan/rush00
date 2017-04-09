@@ -1,7 +1,10 @@
-#include <Player.class.hpp>
-#include <Game.class.hpp>
-#include <debug.hpp>
-#include <Laser.class.hpp>
+//#include <Player.class.hpp>
+#include "../includes/Player.class.hpp"
+//#include <Game.class.hpp>
+#include "../includes/Game.class.hpp"
+//#include <debug.hpp>
+#include "../includes/Laser.class.hpp"
+//#include <Laser.class.hpp>
 
 Player::Player(void) {}
 
@@ -52,7 +55,6 @@ void Player::update() {
 	if (Game::getInputManager().isKeyPressed(KeySpace)) {
 		shoot();
 	}
-
 	_shape.setPosition(pos);
 }
 

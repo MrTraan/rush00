@@ -18,7 +18,7 @@ Zorg::Zorg(Shape s) : GameObject(s) {
 	_behaviour[4].x = 1;
 	_behaviour[4].y = 0;
 
-	_behaviour[5].x = 1;
+	_behaviour[5].x = 1;			//c'est degeu je sais...dsl :p
 	_behaviour[5].y = 0;
 
 	_behaviour[6].x = -1;
@@ -63,10 +63,7 @@ void Zorg::update() {
 		pos.y += _behaviour[_ind].y;
 		_ind++;
 	}
-
-
 	_shape.setPosition(pos);
-
 
 	for (Node* itr = Game::getGameObjectManager()._gameObjectList.begin(); itr;
 	     itr = itr->next) {

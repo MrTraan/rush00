@@ -20,7 +20,12 @@ void GameObject::draw(NDisplay& window) {
 	window.draw(_shape);
 }
 
-void GameObject::update() {}
+void GameObject::update() {
+	Vector2 pos = _shape.getPosition();
+		pos.y += 3;
+
+	_shape.setPosition(pos.x, pos.y);
+}
 
 int GameObject::getWidth() const {
 	return _shape.getWidth();
@@ -55,6 +60,8 @@ bool valueInRange(int value, int min, int max) {
 }
 
 bool GameObject::collide(GameObject& go) {
+	if (go.getShape().getshape() == "o" || this->getShape().getshape() == "o")
+		return false;
 	Shape const& oShape = go.getShape();
 
 	bool xOverlap = valueInRange(_shape.getPosX(), oShape.getPosX(),

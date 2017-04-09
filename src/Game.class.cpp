@@ -32,22 +32,26 @@ void Game::start() {
 }
 
 void Game::gameLoop() {
+	int diff = 0;
 	while (_state == PLAYING) {
+		_time = clock();
 		_inputManager.readInput();
 		clear();
 		userInterface();
+		environmentGenerator();
 		ennemyGenerator();
 		_gameObjectManager.updateAll(_mainWindow);
 		_gameObjectManager.drawAll(_mainWindow);
 
 		refresh();
-		usleep(13000);
+		diff = clock() - _time;
+		usleep(13000 - diff);
 
 		if (_inputManager.isKeyPressed(KeyExit)) {
 			_state = EXITING;
 		}
 		tick++;
-		if (!tick % 1000 == 0)
+		if (!tick % 1000000 == 0)
 			score++;
 	}
 }
@@ -74,20 +78,37 @@ void Game::ennemyGenerator() {
 	}
 }
 
-void Game::environmentGenerator() {}
+void Game::environmentGenerator() {
+	//attron(A_STANDOUT);
+		int rdmX =
+	    rand() % (_mainWindow.getX() - _mainWindow.getBoundaries().x -
+	              _mainWindow.getBoundaries().y) +
+	    _mainWindow.getBoundaries().x;  // random position (in boundaries)
+	int rdmN = rand() % NB_ENEMY;       // random number (0 to ...)
+
+	rdmN = 1;
+	if (tick % 50 == 0) {
+		while (rdmN--) {
+			GameObject* e = new Ennemy(Shape(1, 1, rdmX, 0, "o"));
+			_gameObjectManager.add("Env", e);
+		}
+	}
+
+}
+
 void Game::userInterface() {
-	attron(A_STANDOUT);
+
 	for (int i = 0; i < _mainWindow.getY(); i++) {
 		_mainWindow.prints(
-		    "  ", _mainWindow.getX() - _mainWindow.getBoundaries().y / 2, i);
-		_mainWindow.prints("  ", _mainWindow.getX() - 2, i);
+		    "**", _mainWindow.getX() - _mainWindow.getBoundaries().y / 2, i);
+		_mainWindow.prints("**", _mainWindow.getX() - 2, i);
 	}
+	
 	for (int i = _mainWindow.getX() - _mainWindow.getBoundaries().y / 2;
 	     i < _mainWindow.getX(); i++) {
-		_mainWindow.print(' ', i, 0);
-		_mainWindow.print(' ', i, _mainWindow.getY() - 1);
+		_mainWindow.print('*', i, 0);
+		_mainWindow.print('*', i, _mainWindow.getY() - 1);
 	}
-	attroff(A_STANDOUT);
 	mvprintw(5, _mainWindow.getX() - _mainWindow.getBoundaries().y / 3,
 	         "Score : %d", score);
 }
@@ -111,3 +132,4 @@ GameObjectManager Game::_gameObjectManager;
 int Game::tick = 0;
 int Game::score = 0;
 int Game::life = 0;
+clock_t Game::_time = 0;
