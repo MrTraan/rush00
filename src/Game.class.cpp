@@ -37,7 +37,7 @@ void Game::gameLoop() {
 	while (_state == PLAYING) {
 		_inputManager.readInput();
 		clear();
-		GameObjectgenerator();
+		GameObjectGenerator();
 		_gameObjectManager.updateAll(_mainWindow);
 		_gameObjectManager.drawAll(_mainWindow);
 
@@ -55,9 +55,10 @@ InputManager& Game::getInputManager() {
 	return _inputManager;
 }
 
-void Game::GameObjectgenerator() {
-	int rdmX = rand() % _mainWindow.getX();  // random position (0 to COLS)
-	int rdmN = rand() % NB_ENEMY;            // random number (0 to ...)
+void Game::GameObjectGenerator() {
+	int rdmX = rand() % (_mainWindow.getX() - _mainWindow.getBoundaries().x - _mainWindow.getBoundaries().y) + 
+		_mainWindow.getBoundaries().x;  			// random position (in boundaries)
+	int rdmN = rand() % NB_ENEMY;            		// random number (0 to ...)
 
 	rdmN = 1;
 	if (tick % 10 == 0) {
@@ -67,6 +68,8 @@ void Game::GameObjectgenerator() {
 		}
 	}
 }
+
+
 
 NDisplay& Game::getWindow() {
 	return _mainWindow;
@@ -81,7 +84,7 @@ void Game::triggerLose() {
 }
 
 InputManager Game::_inputManager;
-NDisplay Game::_mainWindow;
+NDisplay Game::_mainWindow(30,120);
 Game::eGameState Game::_state = UNINITIALIZED;
 GameObjectManager Game::_gameObjectManager;
 int Game::tick = 0;

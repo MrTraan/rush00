@@ -4,6 +4,7 @@
 #include <iostream>
 #include <ncurses.h>
 #include "../includes/Shape.hpp"
+#include "../includes/Vector2.class.hpp"
 
 #define NB_W_MAX 10
 
@@ -11,7 +12,7 @@ class NDisplay {
    public:
 	static int sNbWindows;
 
-	NDisplay(void);
+	NDisplay(int l, int r);
 	NDisplay(NDisplay const& src);
 	~NDisplay(void);
 
@@ -38,11 +39,13 @@ class NDisplay {
 
 	int getX(void) const;
 	int getY(void) const;
-
+	Vector2 getBoundaries();
 
 	NDisplay& operator=(NDisplay const& rhs);
 
    private:
+   NDisplay(void);
+   Vector2 _boundaries;
 	WINDOW* _Windows[NB_W_MAX];
 };
 

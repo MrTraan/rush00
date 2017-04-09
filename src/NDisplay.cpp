@@ -3,9 +3,11 @@
 
 int NDisplay::sNbWindows = 0;
 
-NDisplay::NDisplay(void) {
+NDisplay::NDisplay(int l, int r) {
 	initscr();
-
+	_boundaries.x = l;
+	_boundaries.y = r;
+	subWinStdr(0,50, getY(),0, getX() - 50);
 	cbreak();
 	noecho();
 	keypad(stdscr, TRUE);
@@ -13,8 +15,6 @@ NDisplay::NDisplay(void) {
 	curs_set(FALSE);
 	for (int i = 0; i < NB_W_MAX; i++)
 		_Windows[i] = NULL;
-	subWinStdr(0,30, getY(),0, getX() - 30);
-	
 	// std::cout<<"Default constructor called"<<std::endl;
 }
 
@@ -81,6 +81,8 @@ void NDisplay::waitForQuit() {}
 void NDisplay::subWinStdr(int id, int width, int height, int x, int y) {
 	if (sNbWindows < NB_W_MAX - 1) {
 		_Windows[id] = subwin(stdscr, width, height, y, x);
+		box(_Windows[0], ACS_VLINE, ACS_HLINE);
+		wrefresh(_Windows[0]);
 		NDisplay::sNbWindows++;
 	} else
 		prints("ERROR: Index too big", 1, 1);
@@ -93,6 +95,10 @@ int NDisplay::getY(void) const {
 	return LINES;
 }
 
+Vector2 NDisplay::getBoundaries()
+{
+	return _boundaries;
+}
 
 NDisplay& NDisplay::operator=(NDisplay const& rhs) {
 	// std::cout<<"Assignation operator called"<<std::endl;

@@ -3,6 +3,7 @@
 #include "../includes/NDisplay.hpp"
 #include <GameObjectManager.class.hpp>
 
+
 class Game {
    public:
 	Game(void);
@@ -30,5 +31,6 @@ class Game {
 	static NDisplay _mainWindow;
 	static InputManager _inputManager;
 	static GameObjectManager _gameObjectManager;
-	static void GameObjectgenerator();
+	static void GameObjectGenerator();
+	static void EnvironmentGenerator();
 };
