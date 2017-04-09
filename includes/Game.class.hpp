@@ -21,6 +21,9 @@ class Game {
 	static void triggerLose();
 
 	static int tick;
+	static int score;
+	static int nbShot;
+	static int life;
 
    private:
 	enum eGameState { PLAYING, EXITING, UNINITIALIZED, LOST };
@@ -31,6 +34,8 @@ class Game {
 	static NDisplay _mainWindow;
 	static InputManager _inputManager;
 	static GameObjectManager _gameObjectManager;
-	static void EnnemyGenerator();
-	static void EnvironmentGenerator();
+	static void ennemyGenerator();
+	static void environmentGenerator();
+	static void userInterface();
+
 };

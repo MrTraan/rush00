@@ -21,6 +21,7 @@ public:
 	virtual void update();
 
    protected:
+   
    	Vector2 _behaviour[11];
 	int _ind;
 

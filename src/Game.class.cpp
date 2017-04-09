@@ -21,9 +21,6 @@ Game& Game::operator=(const Game& rhs) {
 }
 
 void Game::start() {
-	//	Player* t = new Player(Shape(12, 3, Game::_mainWindow.getX() / 2,
-	//	                             _mainWindow.getY() / 2,
-	//	                             "__---^^---______________------------"));
 	Player* t = new Player(Shape(2, 1, Game::_mainWindow.getX() / 2,
 	                             _mainWindow.getY() / 2, "{}"));
 
@@ -38,7 +35,8 @@ void Game::gameLoop() {
 	while (_state == PLAYING) {
 		_inputManager.readInput();
 		clear();
-		EnnemyGenerator();
+		userInterface();
+		ennemyGenerator();
 		_gameObjectManager.updateAll(_mainWindow);
 		_gameObjectManager.drawAll(_mainWindow);
 
@@ -49,6 +47,8 @@ void Game::gameLoop() {
 			_state = EXITING;
 		}
 		tick++;
+		if (!tick % 1000 == 0)
+			score++;
 	}
 }
 
@@ -56,25 +56,39 @@ InputManager& Game::getInputManager() {
 	return _inputManager;
 }
 
-void Game::EnnemyGenerator() {
+void Game::ennemyGenerator() {
 	int rdmX = rand() % (_mainWindow.getX() - _mainWindow.getBoundaries().x - _mainWindow.getBoundaries().y) + 
 		_mainWindow.getBoundaries().x;  			// random position (in boundaries)
 	int rdmN = rand() % NB_ENEMY;            		// random number (0 to ...)
 
-	rdmN = 1;
+	rdmN = 3;
 	if (tick % 20 == 0) {
 		while (rdmN--) {
 			Ennemy* t = new Ennemy(Shape(1, 1, rdmX, 0, "V"));
 			_gameObjectManager.add("BasicEnemy", t);
-			Zorg* z = new Zorg(Shape(1, 1, rdmX, 0, "Z"));
-			_gameObjectManager.add("ZEnemy", z);
+			//Zorg* z = new Zorg(Shape(1, 1, rdmX, 0, "Z"));
+			//_gameObjectManager.add("ZEnemy", z);
 		}
 	}
 }
 
-void EnvironmentGenerator() {
+void Game::environmentGenerator() {
 
 
+}
+void Game::userInterface() {
+
+	attron(A_STANDOUT);
+	for(int i = 0; i <_mainWindow.getY();i++) {
+		_mainWindow.prints("  ", _mainWindow.getX()-_mainWindow.getBoundaries().y / 2, i);
+		_mainWindow.prints("  ", _mainWindow.getX() - 2, i);		
+	}
+	for(int i = _mainWindow.getX()-_mainWindow.getBoundaries().y /2; i < _mainWindow.getX(); i++) {
+		_mainWindow.print(' ', i, 0);
+		_mainWindow.print(' ', i, _mainWindow.getY() - 1);
+	}
+	attroff(A_STANDOUT);
+	mvprintw( 5, _mainWindow.getX()-_mainWindow.getBoundaries().y / 3, "Score : %d", score);
 }
 
 NDisplay& Game::getWindow() {
@@ -94,4 +108,5 @@ NDisplay Game::_mainWindow(30,120);
 Game::eGameState Game::_state = UNINITIALIZED;
 GameObjectManager Game::_gameObjectManager;
 int Game::tick = 0;
-
+int Game::score = 0;
+int Game::life = 0;
