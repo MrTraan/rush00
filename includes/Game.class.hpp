@@ -27,5 +27,4 @@ class Game {
 	static InputManager _inputManager;
 	static GameObjectManager _gameObjectManager;
 	static void GameObjectgenerator();
-	static int tick;
 };

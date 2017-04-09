@@ -5,6 +5,7 @@ int NDisplay::sNbWindows = 0;
 
 NDisplay::NDisplay(void) {
 	initscr();
+
 	cbreak();
 	noecho();
 	keypad(stdscr, TRUE);
@@ -12,6 +13,8 @@ NDisplay::NDisplay(void) {
 	curs_set(FALSE);
 	for (int i = 0; i < NB_W_MAX; i++)
 		_Windows[i] = NULL;
+	subWinStdr(0,30, getY(),0, getX() - 30);
+	
 	// std::cout<<"Default constructor called"<<std::endl;
 }
 
@@ -73,14 +76,6 @@ void NDisplay::clrW(int id) {
 
 void NDisplay::waitForQuit() {}
 
-void NDisplay::waitForQuitW(int id, char c) {
-	if (getch() == c)
-		if (id && id < NB_W_MAX && _Windows[id]) {
-			clrW(id);
-			delwin(_Windows[id]);
-			sNbWindows--;
-		}
-}
 
 
 void NDisplay::subWinStdr(int id, int width, int height, int x, int y) {

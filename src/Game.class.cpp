@@ -27,8 +27,7 @@ void Game::start() {
 
 	_gameObjectManager.add("testObject", t);
 	_state = PLAYING;
-	//_mainWindow.prints("salut", _mainWindow.getX() / 2, _mainWindow.getY() /
-	// 2);
+
 	gameLoop();
 	_state = EXITING;
 }
@@ -47,7 +46,6 @@ void Game::gameLoop() {
 		if (_inputManager.isKeyPressed(KeyExit)) {
 			_state = EXITING;
 		}
-		Game::tick++;
 	}
 }
 
@@ -56,7 +54,7 @@ InputManager& Game::getInputManager() {
 }
 
 void Game::GameObjectgenerator() {
-	int rdmX = rand() % _mainWindow.getX(); // random position (0 to COLS)
+	int rdmX = rand() % _mainWindow.getX() - 35; // random position (0 to COLS - 35)
 	int rdmN = rand() % NB_ENEMY; // random number (0 to ...)
 
 	rdmN = 10;
@@ -79,4 +77,3 @@ InputManager Game::_inputManager;
 NDisplay Game::_mainWindow;
 Game::eGameState Game::_state = UNINITIALIZED;
 GameObjectManager Game::_gameObjectManager;
-int Game::tick = 0;

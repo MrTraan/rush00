@@ -36,7 +36,8 @@ void Player::update() {
 			pos.x--;
 		}
 	} else if (Game::getInputManager().isKeyPressed(KeyRight)) {
-		pos.x++;
+		if (pos.x < COLS - getWidth())
+			pos.x++;
 	}
 
 	if (Game::getInputManager().isKeyPressed(KeyUp)) {
@@ -44,7 +45,8 @@ void Player::update() {
 			pos.y--;
 		}
 	} else if (Game::getInputManager().isKeyPressed(KeyDown)) {
-		pos.y++;
+		if (pos.y < LINES - getHeight())
+			pos.y++;
 	}
 
 	if (Game::getInputManager().isKeyPressed(KeySpace)) {

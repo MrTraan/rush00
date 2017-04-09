@@ -33,7 +33,6 @@ class NDisplay {
 	void rfhW(int id);
 	
 	void waitForQuit();
-	void waitForQuitW(int id, char c);
 
 	void subWinStdr(int id, int width, int height, int x, int y);
 
