@@ -16,13 +16,14 @@ Ennemy& Ennemy::operator=(const Ennemy& rhs) {
 }
 
 void Ennemy::collideWithPlayerLaser() {
+	printf("\a");
 	alive = false;
 }
 
 void Ennemy::update() {
 	Vector2 pos = _shape.getPosition();
 
-	if (Game::tick % 2)
+	if (Game::tick % 6 == 0)
 		pos.y += 1;
 	// pos.x += _speed.x;
 

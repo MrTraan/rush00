@@ -57,38 +57,39 @@ InputManager& Game::getInputManager() {
 }
 
 void Game::ennemyGenerator() {
-	int rdmX = rand() % (_mainWindow.getX() - _mainWindow.getBoundaries().x - _mainWindow.getBoundaries().y) + 
-		_mainWindow.getBoundaries().x;  			// random position (in boundaries)
-	int rdmN = rand() % NB_ENEMY;            		// random number (0 to ...)
+	int rdmX =
+	    rand() % (_mainWindow.getX() - _mainWindow.getBoundaries().x -
+	              _mainWindow.getBoundaries().y) +
+	    _mainWindow.getBoundaries().x;  // random position (in boundaries)
+	int rdmN = rand() % NB_ENEMY;       // random number (0 to ...)
 
-	rdmN = 3;
+	rdmN = 1;
 	if (tick % 20 == 0) {
 		while (rdmN--) {
 			Ennemy* t = new Ennemy(Shape(1, 1, rdmX, 0, "V"));
 			_gameObjectManager.add("BasicEnemy", t);
-			//Zorg* z = new Zorg(Shape(1, 1, rdmX, 0, "Z"));
-			//_gameObjectManager.add("ZEnemy", z);
+			Zorg* z = new Zorg(Shape(1, 1, rdmX, 0, "Z"));
+			_gameObjectManager.add("ZEnemy", z);
 		}
 	}
 }
 
-void Game::environmentGenerator() {
-
-
-}
+void Game::environmentGenerator() {}
 void Game::userInterface() {
-
 	attron(A_STANDOUT);
-	for(int i = 0; i <_mainWindow.getY();i++) {
-		_mainWindow.prints("  ", _mainWindow.getX()-_mainWindow.getBoundaries().y / 2, i);
-		_mainWindow.prints("  ", _mainWindow.getX() - 2, i);		
+	for (int i = 0; i < _mainWindow.getY(); i++) {
+		_mainWindow.prints(
+		    "  ", _mainWindow.getX() - _mainWindow.getBoundaries().y / 2, i);
+		_mainWindow.prints("  ", _mainWindow.getX() - 2, i);
 	}
-	for(int i = _mainWindow.getX()-_mainWindow.getBoundaries().y /2; i < _mainWindow.getX(); i++) {
+	for (int i = _mainWindow.getX() - _mainWindow.getBoundaries().y / 2;
+	     i < _mainWindow.getX(); i++) {
 		_mainWindow.print(' ', i, 0);
 		_mainWindow.print(' ', i, _mainWindow.getY() - 1);
 	}
 	attroff(A_STANDOUT);
-	mvprintw( 5, _mainWindow.getX()-_mainWindow.getBoundaries().y / 3, "Score : %d", score);
+	mvprintw(5, _mainWindow.getX() - _mainWindow.getBoundaries().y / 3,
+	         "Score : %d", score);
 }
 
 NDisplay& Game::getWindow() {
@@ -104,7 +105,7 @@ void Game::triggerLose() {
 }
 
 InputManager Game::_inputManager;
-NDisplay Game::_mainWindow(30,120);
+NDisplay Game::_mainWindow(30, 120);
 Game::eGameState Game::_state = UNINITIALIZED;
 GameObjectManager Game::_gameObjectManager;
 int Game::tick = 0;

@@ -3,7 +3,6 @@
 Zorg::Zorg(void) {}
 
 Zorg::Zorg(Shape s) : GameObject(s) {
-
 	_behaviour[0].x = 1;
 	_behaviour[0].y = 0;
 
@@ -18,7 +17,7 @@ Zorg::Zorg(Shape s) : GameObject(s) {
 
 	_behaviour[4].x = 1;
 	_behaviour[4].y = 0;
-	
+
 	_behaviour[5].x = 1;
 	_behaviour[5].y = 0;
 
@@ -39,17 +38,15 @@ Zorg::Zorg(Shape s) : GameObject(s) {
 
 	_behaviour[10].x = -1;
 	_behaviour[10].y = 1;
-	}
+}
 
-Zorg::Zorg(Zorg const &src)
-{
-	//std::cout<<"Copy constructor called"<<std::endl;
+Zorg::Zorg(Zorg const& src) {
+	// std::cout<<"Copy constructor called"<<std::endl;
 	*this = src;
 }
 
-Zorg::~Zorg(void)
-{
-	//std::cout<<"Destructor called"<<std::endl;
+Zorg::~Zorg(void) {
+	// std::cout<<"Destructor called"<<std::endl;
 }
 
 void Zorg::collideWithPlayerLaser() {
@@ -59,15 +56,14 @@ void Zorg::collideWithPlayerLaser() {
 void Zorg::update() {
 	Vector2 pos = _shape.getPosition();
 
-	if (Game::tick % 2)
-	{
-		if (_ind >= 11)
+	if (Game::tick % 2) {
+		if (_ind > 11)
 			_ind = 0;
 		pos.x += _behaviour[_ind].x;
 		pos.y += _behaviour[_ind].y;
 		_ind++;
 	}
-	
+
 
 	_shape.setPosition(pos);
 
@@ -81,11 +77,9 @@ void Zorg::update() {
 		}
 	}
 }
-Zorg &Zorg::operator=(Zorg const &rhs)
-{
-	//std::cout<<"Assignation operator called"<<std::endl;
+Zorg& Zorg::operator=(Zorg const& rhs) {
+	// std::cout<<"Assignation operator called"<<std::endl;
 	if (&rhs != this)
 		_ind = rhs._ind;
 	return *this;
 }
-
