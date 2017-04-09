@@ -35,6 +35,7 @@ void Ennemy::update() {
 		if (itr->go != this) {  // prevent self collision
 			if (collide(*(itr->go))) {
 				itr->go->collideWithEnnemy();
+				
 			}
 		}
 	}

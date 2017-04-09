@@ -35,9 +35,6 @@ Zorg::Zorg(Shape s) : GameObject(s) {
 
 	_behaviour[10].x = -1;
 	_behaviour[10].y = 1;
-
-	_behaviour[10].x = -1;
-	_behaviour[10].y = 1;
 }
 
 Zorg::Zorg(Zorg const& src) {
@@ -57,10 +54,11 @@ void Zorg::update() {
 	Vector2 pos = _shape.getPosition();
 
 	if (Game::tick % 2) {
-		if (_ind > 10)
+		if (_ind > 10) {
 			_ind = 0;
-		pos.x += _behaviour[_ind].x;
-		pos.y += _behaviour[_ind].y;
+		}
+		pos.x += _behaviour[_ind % 11].x;
+		pos.y += _behaviour[_ind % 11].y;
 		_ind++;
 	}
 	_shape.setPosition(pos);
@@ -78,6 +76,6 @@ void Zorg::update() {
 Zorg& Zorg::operator=(Zorg const& rhs) {
 	// std::cout<<"Assignation operator called"<<std::endl;
 	if (&rhs != this)
-		_ind = rhs._ind;
+		_ind = 0;
 	return *this;
 }
