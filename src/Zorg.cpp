@@ -57,7 +57,7 @@ void Zorg::update() {
 	Vector2 pos = _shape.getPosition();
 
 	if (Game::tick % 2) {
-		if (_ind > 11)
+		if (_ind > 10)
 			_ind = 0;
 		pos.x += _behaviour[_ind].x;
 		pos.y += _behaviour[_ind].y;
@@ -77,6 +77,7 @@ void Zorg::update() {
 		}
 	}
 }
+
 Zorg& Zorg::operator=(Zorg const& rhs) {
 	// std::cout<<"Assignation operator called"<<std::endl;
 	if (&rhs != this)
